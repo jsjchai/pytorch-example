@@ -1,5 +1,7 @@
 import torch
+import torchvision
 from torch import autograd
+
 
 a = torch.empty(2, 3)
 print(a)
@@ -22,5 +24,8 @@ c = torch.tensor(3., requires_grad=True)
 y = a ** 2 * x + b * x + c
 
 print(a.grad, b.grad, c.grad)
+# 自动求导
 grad = autograd.grad(y, [a, b, c])
 print(grad[0], grad[1], grad[2])
+
+torch.no_grad()
