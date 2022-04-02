@@ -1,24 +1,9 @@
-import torch
 import torchtext
 
 from embeddingClassifier import *
 import gensim.downloader as api
 
-from torchnlp import load_dataset, train_epoch_emb, padify, encode
-
-
-def offsetify(b):
-    # first, compute data tensor from all sequences
-    x = [torch.tensor(encode(t[1], voc=vocab)) for t in b]  # pass the instance of vocab to encode function!
-    # now, compute the offsets by accumulating the tensor of sequence lengths
-    o = [0] + [len(t) for t in x]
-    o = torch.tensor(o[:-1]).cumsum(dim=0)
-    return (
-        torch.LongTensor([t[0] - 1 for t in b]),  # labels
-        torch.cat(x),  # text
-        o
-    )
-
+from torch_text.common.torchnlp import load_dataset, train_epoch_emb, padify, offsetify
 
 w2v = api.load('word2vec-google-news-300')
 embed_size = len(w2v.get_vector('hello'))
@@ -31,7 +16,7 @@ net = EmbeddingClassifier(vocab_size, embed_size, len(classes))
 
 print('Populating matrix, this will take some time...', end='')
 found, not_found = 0, 0
-for i, w in enumerate(vocab.itos):
+for i, w in enumerate(vocab.get_itos()):
     try:
         net.embedding.weight[i].data = torch.tensor(w2v.get_vector(w))
         found += 1

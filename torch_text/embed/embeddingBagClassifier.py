@@ -1,5 +1,6 @@
 import torch
 
+
 # EmbeddingBag层
 class EmbeddingBagClassifier(torch.nn.Module):
     def __init__(self, vocab_size, embed_dim, num_class):

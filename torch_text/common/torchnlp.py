@@ -1,8 +1,7 @@
-import builtins
+import collections
+
 import torch
 import torchtext
-import collections
-import os
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -13,7 +12,7 @@ tokenizer = torchtext.data.utils.get_tokenizer('basic_english')
 def load_dataset(ngrams=1, min_freq=1):
     global VOC, tokenizer
     print("Loading dataset...")
-    train_dataset, test_dataset = torchtext.datasets.AG_NEWS(root='./data')
+    train_dataset, test_dataset = torchtext.datasets.AG_NEWS(root='../data')
     train_dataset = list(train_dataset)
     test_dataset = list(test_dataset)
     classes = ['World', 'Sports', 'Business', 'Sci/Tech']

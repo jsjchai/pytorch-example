@@ -41,7 +41,7 @@ def train_epoch(net, dataloader, lr=0.01, optimizer=None, loss_fn=torch.nn.NLLLo
     return total_loss.item() / count, acc.item() / count
 
 
-train_dataset, test_dataset = torchtext.datasets.AG_NEWS(root='./data')
+train_dataset, test_dataset = torchtext.datasets.AG_NEWS(root='../data')
 
 train_loader = DataLoader(train_dataset, batch_size=16, collate_fn=bowify, shuffle=True)
 test_loader = DataLoader(test_dataset, batch_size=16, collate_fn=bowify, shuffle=True)
