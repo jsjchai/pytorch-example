@@ -14,8 +14,8 @@ for i in range(7):
     ax[i].set_title(data_train[i][1])
     ax[i].axis('off')
 
-print('Training samples:',len(data_train))
-print('Test samples:',len(data_test))
+print('Training samples:', len(data_train))
+print('Test samples:', len(data_test))
 
-print('Tensor size:',data_train[0][0].size())
+print('Tensor size:', data_train[0][0].size())
 print('First 10 digits are:', [data_train[i][1] for i in range(10)])

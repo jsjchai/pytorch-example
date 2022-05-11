@@ -12,7 +12,7 @@ data_train, data_test = load_mnist()
 net = nn.Sequential(
     nn.Flatten(),
     nn.Linear(784, 10),  # 784 inputs, 10 outputs
-    nn.LogSoftmax())
+    nn.LogSoftmax(dim=1))
 
 print('Digit to be predicted: ', data_train[0][1])
 torch.exp(net(data_train[0][0]))
@@ -33,7 +33,7 @@ plt.subplot(122)
 plt.plot(hist['train_loss'], label='Training loss')
 plt.plot(hist['val_loss'], label='Validation loss')
 plt.legend()
-# plt.show()
+#plt.show()
 
 weight_tensor = next(net.parameters())
 fig, ax = plt.subplots(1, 10, figsize=(15, 4))
